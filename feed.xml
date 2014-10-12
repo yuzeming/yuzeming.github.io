@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>YZM&#39;s Blog</title>
+    <description>Yuzeming&#39;s Blog</description>
+    <link>http://yuzeming.github.io/</link>
+    <atom:link href="http://yuzeming.github.io/feed.xml" rel="self" type="application/rss+xml" />
+    <pubDate>Mon, 13 Oct 2014 02:10:25 +0800</pubDate>
+    <lastBuildDate>Mon, 13 Oct 2014 02:10:25 +0800</lastBuildDate>
+    <generator>Jekyll v2.4.0</generator>
+    
+      <item>
+        <title>个人技术报告</title>
+        <description>&lt;p&gt;我在团队中负责添加Haskell支持。并为其他队员提供技术支持。&lt;/p&gt;
+
+&lt;p&gt;我先简单看了一下文档，并尝试在MacOS下进行部署。我并没有完全按照文档的做，因为Makefile是位linux写的，无法在MacOS下运行。&lt;/p&gt;
+
+&lt;p&gt;安装了基础的软件包想要尝试运行的时候。发现总是无法连接到服务器。推断应该是WebSocket没有连接上。在DevTools上观察network的确是有一个连接失败了，并且推测这个连接是WS的请求。&lt;/p&gt;
+
+&lt;p&gt;但是我无法判断是nginx的问题阻断了连接还是nodejs的问题没有处理连接。在查看了app.js的代码。发现有一个debug的选项没有打开，先打开了连接会有信息显示。打开debug以后发现还是没有办法连接到服务器。并且没有什么提示。&lt;/p&gt;
+
+&lt;p&gt;最后经室友提醒发现doc文档里还有两个步骤。需要替换socket.io.js这个文件。仔细分析室这个文件与npm安装的不一致造成的。去项目目录下搜索这个文件。用node_modules下的文件替换static下的文件。&lt;/p&gt;
+
+&lt;p&gt;发现doc里提示还需要替换一个mongodb的依赖库，将替换的文件打开观察还是版本问题。先不管了。&lt;/p&gt;
+
+&lt;p&gt;替换以后登陆和注册功能就都正常了，但是无法创建文件。查看nodejs的输出窗口发现了对undefined的变量取属性的问题。但是没有提示行号和堆栈信息，无法定位错误。用WebStorm载入项目进行调试。选中Any Exception Breakpoint。在出现问题的时候中断，最终定位是在insert操作的回调函数中出现了问题。
+两个版本回调函数参数不一样。0.9返回了一个数组，而1.X版本直接返回了这个数组的第一个元素。&lt;/p&gt;
+
+&lt;p&gt;Haskell支持比较好弄。在runner.js内添加对应的编译命令即可。然后需要修改前端使得hs文件可以运行。
+一开始猜测后端判断这个文件能不能运行，并传输给前端，但是找了好久之后并没有发现这样的代码。最后在前端的代码里找到了设置。data.js文件里记录了很多的配置。但是外面却还有一个叫conf.js的文件，没有合并在一起。&lt;/p&gt;
+
+&lt;p&gt;我发现在Nodejs里很多代码其实想做的是同步的读取一个文件，但是Nodejs里没有同步，阻塞这样的机制。必须通过回调函数来模拟实现。这样就造成了代码层次很深，难以维护。或许是编写者的思维方式还没有转变。&lt;/p&gt;
+
+&lt;p&gt;用一个东西去模拟另一个东西，总是下下策。&lt;/p&gt;
+</description>
+        <pubDate>Sun, 12 Oct 2014 00:00:00 +0800</pubDate>
+        <link>http://yuzeming.github.io/2014/10/12/%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A.html</link>
+        <guid isPermaLink="true">http://yuzeming.github.io/2014/10/12/%E6%8A%80%E6%9C%AF%E6%8A%A5%E5%91%8A.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
