@@ -1,0 +1,10 @@
+# Site settings
+title: "YZM's Blog"
+email: yuzeming@gmail.com
+description: "Yuzeming's Blog"
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://yuzeming.github.io" # the base hostname & protocol for your site
+github_username:  yuzeming
+
+# Build settings
+markdown: kramdown
